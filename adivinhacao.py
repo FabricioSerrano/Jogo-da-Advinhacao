@@ -5,6 +5,8 @@ import random
 #utils
 numero_secreto = random.randint(0,100)
 chances = 0
+maxChances = 0
+nivel = 1 #1 - facil 2- médio 3-dificil
 
 #head
 
@@ -18,8 +20,25 @@ print('Foi gerado um número aleatório entre 0 e 100 e cabe a você acertar')
 #wait
 time.sleep(2)
 
+#dificuldade
+
+nivel = int(input('Escolha a dificuldade entre: \n 1 - fácil \n 2 - médio \n 3 - difícil \n'))
+
+if (nivel == 1) :
+    maxChances = 10
+
+elif (nivel == 2) :
+    maxChances = 5
+
+elif (nivel == 3):
+    maxChances = 3
+
+else :
+    print('Opção inválida\n será atribuido a dificuldade média')
+    maxChances = 5
+
 #chances
-print('Você tem 4 chances de acertar')
+print('Você tem {} chances de acertar'.format(maxChances))
 
 #dica
 
@@ -57,7 +76,7 @@ time.sleep(1)
 
 
 #contagem de vidas  
-for chances in range(1,5):
+for chances in range(1, maxChances + 1):
 
     #chances
     print('chance nº {}'.format(chances))
@@ -72,14 +91,16 @@ for chances in range(1,5):
 
     chute = int(input('Digite um número: '))
 
-    #opções
+    #verificação 
     acerto = numero_secreto == chute
     Menos = numero_secreto > chute
     Mais = numero_secreto < chute
 
 
-    #verificação
+    #main
 
+
+    #se acertou entra nesse if
     if acerto:
         print('VOCÊ ACERTOU... \n O número secreto era {}'.format(numero_secreto))
         print(' ')
@@ -91,8 +112,11 @@ for chances in range(1,5):
         print('O número secreto era {}'.format(numero_secreto))
         print(' ')
         break
-
+    
+    #se não acertou, entra nesse else
     else:
+
+        #te dá uma interação de acordo com o número que você digitou
         if Mais:
             print('HUUUUL POR CIMA DA TRAVE... \n O número secreto é menor do que {}'.format(chute))
             print(' ')
@@ -103,7 +127,9 @@ for chances in range(1,5):
             print(' ')
             chances +=1
 
-        if chances == 5 :
+        #quando acabar as chances, encerra
+        if chances == maxChances + 1:
+
             print('¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨')
             print('              GAME OVER             ')
             print('____________________________________')
